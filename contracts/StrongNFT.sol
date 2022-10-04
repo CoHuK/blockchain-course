@@ -14,7 +14,7 @@ contract StrongNFT is ERC721, ERC721URIStorage, Ownable {
     constructor() ERC721("StrongNFT", "SFT") {}
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://www.dropbox.com/s/6jco35nj9dnu3rz/";
+        return "https://raw.githubusercontent.com/CoHuK/blockchain-course/main/nft/travel%20maps/";
     }
 
     function safeMint(address to, string memory uri) public onlyOwner {
