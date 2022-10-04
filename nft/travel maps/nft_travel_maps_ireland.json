@@ -1,0 +1,16 @@
+{
+	"name": "Strong Travel maps - Ireland token",
+	"description": "Google Location data exported and processed to create these beautiful travel maps",
+	"image": "https://www.dropbox.com/s/gyr78otsi84girr/derive-export%20%282%29.png?dl=1",
+	"external_url": "http://strongin.qa",
+	"attributes": [
+		{
+			"trait_type": "Artifact",
+			"value": "Map"
+		},
+		{
+			"trait_type": "Collection",
+			"value": "Travel Maps"
+		}
+	]
+}
