@@ -49,6 +49,7 @@ function ContractUser() {
         console.log(result);
         console.log("Try to sent alert:");
         alert("Send "+cost+" Wei to "+result.events.SupplyChainStep.returnValues._address);
+        listenToPaymentEvent();
       };
     
     const handleInputChange = (event) => {
@@ -60,12 +61,34 @@ function ContractUser() {
         console.log(state);
     }
 
+    const listenToPaymentEvent = () => {
+        console.log("Item manager " + state.itemManager)
+        if(state.itemManager) {
+            console.log("Listening to events");
+            console.log(state.itemManager.events.SupplyChainStep());
+            console.log("ItemManager exists!");
+            state.itemManager.events.SupplyChainStep().on("data", async function(evt) {
+                console.log('Event triggered!!!!');
+                if(evt.returnValues._step === "1") {
+                    let item = await state.itemManager.methods.items(evt.returnValues._itemIndex).call();
+                    console.log(item);
+
+                    console.log("Try to sent alert about payment:");
+                    alert("Item " + item._identifier + " was paid, deliver it now!");
+                };
+                console.log(evt);
+            });
+        };
+    }
     useEffect(() => { componentDidMount() }, [] );
+
 
     if (!state.loaded) {
         console.log(state);
         return <div>Loading Web3, accounts, and contract...</div>;
     }
+    
+    // listenToPaymentEvent();
     return (
         <div className="App">
           <h1>Simply Payment/Supply Chain Example!</h1>
