@@ -10,7 +10,8 @@ function ContractUser() {
 
     const componentDidMount = async () => {
         try {
-            const web3 = new Web3("ws://localhost:9545");
+            const web3 = new Web3(window.ethereum);
+            await window.ethereum.enable();
             // Use web3 to get the user's accounts.
             const _accounts = await web3.eth.getAccounts();
 
@@ -44,8 +45,9 @@ function ContractUser() {
         console.log("Submit handling");
         console.log(itemName, cost, itemManager);
         let result = await state.itemManager.methods.createItem(itemName, cost).send({ from: accounts[0] });
+        console.log("Result:");
         console.log(result);
-
+        console.log("Try to sent alert:");
         alert("Send "+cost+" Wei to "+result.events.SupplyChainStep.returnValues._address);
       };
     
