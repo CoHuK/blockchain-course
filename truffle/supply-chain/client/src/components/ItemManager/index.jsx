@@ -51,12 +51,12 @@ function ContractUser() {
         alert("Send "+cost+" Wei to "+result.events.SupplyChainStep.returnValues._address);
         listenToPaymentEvent();
       };
-    
+
     const handleInputChange = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-    
+
         setState({...state, [name]:value});
         console.log(state);
     }
@@ -80,20 +80,23 @@ function ContractUser() {
             });
         };
     }
-    useEffect(() => { componentDidMount() }, [] );
+
+    useEffect(() => {
+        componentDidMount()
+        // listenToPaymentEvent();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     if (!state.loaded) {
         console.log(state);
         return <div>Loading Web3, accounts, and contract...</div>;
     }
-    
-    // listenToPaymentEvent();
+
     return (
         <div className="App">
           <h1>Simply Payment/Supply Chain Example!</h1>
           <h2>Items</h2>
-  
+
           <h2>Add Element</h2>
           Cost: <input type="text" name="cost" value={state.cost} onChange={handleInputChange} />
           Item Name: <input type="text" name="itemName" value={state.itemName} onChange={handleInputChange} />
